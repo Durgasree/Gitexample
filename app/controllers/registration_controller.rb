@@ -8,9 +8,9 @@ class RegistrationController < ApplicationController
   end
   
   def create
-    @person = Person.create(user_params)
+    @person = Person.new(user_params)
     if @person.save
-      redirect_to users_path
+      redirect_to registration_index_path
     else
       render "new"
     end
@@ -27,7 +27,7 @@ class RegistrationController < ApplicationController
   def update
     @person = Person.find(params[:id])
     if @person.update(user_params)
-      redirect_to users_path
+      redirect_to registration_index_path
     else
       render "edit"
     end
@@ -35,11 +35,11 @@ class RegistrationController < ApplicationController
   
   def destroy
     @person = Person.find(params[:id])
-    redirect_to users_path
+    redirect_to registration_index_path
   end
   
   private 
    def user_params
-      params.require(:person).permit()
+      params.require(:person).permit(:name,:age,:dob,:phone,:email,:address,:gender,:desg,:salary)
     end
 end
